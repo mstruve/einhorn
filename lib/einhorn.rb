@@ -339,6 +339,8 @@ module Einhorn
     else
       cmdline << Einhorn::TransientState.script_name
     end
+    Einhorn.log_info("REEXEC COMMAND ******************* #{Einhorn::State.reexec_commandline}")
+    Einhorn.log_info("IF NO COMMAND ******************* #{Einhorn::TransientState.script_name}")
     cmdline += einhorn_flags
     cmdline << '--'
     cmdline += Einhorn::State.cmd

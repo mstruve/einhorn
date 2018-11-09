@@ -25,7 +25,15 @@ module Einhorn
 
     # Opts are ignored in Ruby 1.8
     def self.exec(script, args, opts={})
+      if start_pwd = ENV["SYMLINK"]
+        opts[:chdir] ||= start_pwd
+      end
+      Einhorn.log_info("ARGS #{args}")
+      Einhorn.log_info("OPTS #{opts}")
+
       cmd = [script, script]
+
+      Einhorn.log_info("EXEC COMMAND #{cmd}")
       begin
         Kernel.exec(cmd, *(args + [opts]))
       rescue TypeError
